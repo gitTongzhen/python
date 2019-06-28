@@ -52,12 +52,14 @@ class AliPay(Payment):
         else:
             print("使用支付宝支付%s元"%money)
 
-class ApplePay(Payment)
+class ApplePay(Payment):
     #具体的产品角色
     def pay(self,money):
         print("使用苹果支付支付%s元"%money)
-class PaymentFactory:
-
+class PaymentFactory():
+    def create_payment(self,method):
+        if method == 'alipay':
+            return Alipay
 
 ```
 
@@ -70,32 +72,30 @@ class PaymentFactory:
 ```python
 from abc import ABCMeta,abstractmethod
 
-#抽象主题
-class Oberserver(metaclass=ABCMeta):
-    @abstractmethod
-    def update(self):
-        pass
-
-#具体主题
-class Notice:
+class notice():
     def __init__(self):
-        self.observers = []
-        
-    def attach(self,obs):
-        self.observers.append(obs)
-    
-    def detach(self,obs):
-        self.observers.remove(obs)
-    
+        self.observers=[]
+        self.message=''
+    def attach(self,observer):
+        self.observers.append(observer)
     def notify(self):
-        for obj in self.observers:
-            obj.update(self)
+        for observe in self.observers:
+            observe.update()
 
-# 抽象观察者
-class ManagerNotice(Notice):
-    def __init__(self,company_info=None):
-        super().__init__()
-        self.__company_info = company_info
-        
+class StockObserve():
+    def __init__(self,name,notice):
+        self.name = name
+        self.notice = notice
+    def update(self):
+        print("here we go: %s fg %s "%(self.notice.message,self.name))
+
+if __name__ == '__main__':
+    notice=notice()
+    observer1 = StockObserve('张三',notice)
+    observer2 = StockObserve('Lisi',notice)
+    notice.attach(observer1)
+    notice.attach(observer2)
+    notice.message ='laile laodi'
+    notice.notify()
 
 ```
