@@ -44,42 +44,53 @@ f.pay(100)
 
 
 
+# class singleTon():
+#     def __init__(self):
+#         pass
+#     @classmethod
+#     def instance(cls,*args,**kwargs):
+#         if not hasattr(singleTon,"_instance"):
+#             singleTon._instance = singleTon(*args,**kwargs)
+#         return singleTon._instance
 
 
-class monkey():
-    def pay(self):
-        print("请支付10元")
 
-class tiger():
-    def pay(self):
-        print("请致富50元")
-class elephant():
-    def pay(self):
-        print("请支付100元")
 
-class watchFactory():
-    def watch(self,method):
-        if method == 'monkey':
-            return monkey()
-        if method == 'tiger':
-            return tiger()
-        if method == 'elephant':
-            return elephant()
+# class monkey():
+#     def pay(self):
+#         print("请支付10元")
 
-watcher = watchFactory()
-a=watcher.watch('monkey')
-a.pay()
+# class tiger():
+#     def pay(self):
+#         print("请致富50元")
+# class elephant():
+#     def pay(self):
+#         print("请支付100元")
+
+# class watchFactory():
+#     def watch(self,method):
+#         if method == 'monkey':
+#             return monkey()
+#         if method == 'tiger':
+#             return tiger()
+#         if method == 'elephant':
+#             return elephant()
+
+# watcher = watchFactory()
+# a=watcher.watch('monkey')
+# a.pay()
 
 class person():
     name ="ren"
 class animal(object):
     def __init__(self):
         self.name = 'dongwu'
-        print(dir(object))
-#a=animal()
+        #print(dir(object))
+a=animal()
 
-b= person()
-print(dir(b))
+print(a.__)
+# b= person()
+# print(dir(b))
 # ### 单例模式
 # class Singleton(object):
 #     # 如果该类已经有一个实例了就直接返回，否则创建一个全局唯一的实例

@@ -53,4 +53,34 @@ print(dir(b))
 ```
 
 在python3中默认帮你加载了object类，所以两者的打印并没有什么区别
-但是在
+但是在python2 中，二者是有区别的
+
+### 3.装饰器 classmethod 和 staticmethod
+
+```python
+class stclass():
+    d=1
+    #对象方法
+    def imethod(self):
+        print(self)
+        print("instance method")
+    #类方法
+    @classmethod
+    def cmethod(cls):
+        print(cls)
+        print("class method")
+    #静态方法
+    @staticmethod
+    def smethod():
+        print("static method")
+ 
+sc = stclass()
+sc.imethod()
+sc.cmethod()
+sc.smethod()
+
+```
+
+1.第一个方法属于实例方法，该方法的第一个参数是当前实例，拥有当前类和实例的所有特性
+2.类方法，该实例属于类，该方法的第一个参数是当前类，可以对类做一些处理，如果一个静态方法和类有关，但是和实例无关，那么使用该方法
+3.静态方法，该实例属于类，但是该方法没有参数，也就是说该方法不能对类做处理，相当于全局方法
