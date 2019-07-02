@@ -26,9 +26,5 @@ class Leaf(Medium1, Medium2):
         print("Leaf init")
 
 
-leaf = Leaf()
-print(Leaf.mro())
-
-a ="122345"
-b=a.replace("122","123")
-print(b)
+import os
+print(help(os.listdir()))
