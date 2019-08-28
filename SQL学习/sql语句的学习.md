@@ -91,3 +91,37 @@ ADD column_name datatype
 ALTER TABLE table_name
 DROP COLUMN column_name
 
+
+
+
+-------------------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+1.常用命令
+```
+select 某列 from table
+select distinct 某列 from table; 列出不同(distinct)的值
+select 列名称 from 表名称 where 列 运算符 值；
+select * from table where 列 运算符 值；条件查询(运算符： + <> >= between like)
+select * from table where name = 'asdf' and id =1 ; and 运算符
+select * from table where (name = 'dasdf' or id =23) and a_id =23
+select * from table order by 列名称
+insert into table values ('值'，'值'，'值','值') 插入新的行
+insert into table (列名称,列名称) values('值'，'值'); 给指定的列插入数据
+update table set 列名称 = 新值，列名称 = 新值 where id = 2; update 修改表中的数据
+delete from table where id =1 删除某行
+SQL高级语法：
+select * from table limit 5 ;
+select top 2 * from table; 取前两条
+select top 50 percent * from table ; 取50%的数据
+select * from table where 列名称 like 'n%'
+可用于做通配符（% 代替一个或者多个字符 _：仅代表一个字符）
+select * from table where id in (1,2,3,4)
+select * from table where id between  between操作符
+select * from 
+```
+
+
+
+---------------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+2.sql性能和故障排查
+
+show processlist;
