@@ -350,3 +350,90 @@ myPrint(dog2)
 可以把self当成是C++类里面的this指针一样理解，就是对象本身的意思
 某个对象调用其方法的时候，python解释器会把这个对象的第一个参数传递给self
 所以开发者只需要传递后面的参数就好了
+
+面向对象
+1.保护对象的属性
+如果有一个对象，当需要对其进行修改属性的时候，有两种方法
+1.对象名.属性名 = 数据 --->直接修改
+2.对象名.方法名 ----->间接修改
+
+为了更好的保护属性的安全，即不能够随意的更改，一般的处理方式为
+1.将属性定义为私有属性
+2.添加一个可以调用的方法，供调用
+
+```python 
+class People:
+    def __init__(self,name):
+        self.__name = name
+    def getName(self): #提供调用私有属性的方法
+        return self.__name
+    def setName(self,nameName):
+        if len(newName)>5:
+            self.__name = newName
+        else:
+            print("长大了")
+xiaoming = People("xaioming")
+xiaoming = setName("xiaohuang")
+print(xiaoming.getName())
+```
+2.__del__()方法
+当删除一个对象的时候，python解析器，也会默认调用一个方法，这个方法就是__del__()
+方法
+
+```python
+class Animal:
+    # 初始化方法
+    def __init__(self,name):
+        print("__init__方法被调用")
+        self.__name = name
+    
+    ##析构的方法： 当对象被删除的时候会自动调用
+    def __del__(self):
+        print("__del__ 方法被调用")
+        print("%s对象马上狗带。。"%self.__name)
+
+dog = Animal("柯基")
+del dog
+
+```
+#### 8.静态方法和类方法
+1.类方法
+1.是类对象所拥有的方法，需要用装饰器@classmethod来标识其为类方法，对于类方法，第一个参数，必须是类对象，一般以cls作为第一个参数（当然可以用其他名称的变量作为其第一个参数，但是大部分人都习惯以cls作为第一个参数的名称，就最好用cls），能够通过实例对象和类对象去访问
+
+```python
+class People(object):
+    country = 'china'
+    ## 类方法，使用classmethod 来进行修饰
+    @classmethod
+    def getCountry(cls):
+        return cls.country
+
+p = People()
+print(p.getCountry())  #可以用过实例对象引用
+
+print(People.getCountry())
+
+```
+
+类方法还有一个用途就是可以对类属性进行修改：
+
+```python
+class People(object):
+    country = 'china'
+    #类方法 用classmethod 来进行修饰
+    @classmethod
+    def getCountry(cls):
+        return cls.country
+    @classmethod
+    def setCountry(cls,country):
+        cls.country = country
+
+p = People()
+
+print(p.getCountry())   #可以用实例对象引用
+print(People.getCountry())   #可以用类对象进行引用
+People.setCountry('japen')
+print(p.getCountry())
+print(People.getCountry())
+
+```
