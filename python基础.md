@@ -246,3 +246,107 @@ print(os.listdir("./"))
 import os
 os.chdir("./")
 os.rmdir("xiong")
+
+
+面向对象
+1.概念
+面向过程：根据业务逻辑从上到下写代码
+面向对象：将函数和数据进行绑定到一起，进行封装，这样子能够更快的开发程序，减少重复代码的重写过程
+OOP是一种解决软件复用的设计和编程方法，这种方法把软件系统中相近相似的操作逻辑和操作应用数据，状态，类的形式描述出来
+2.类和对象
+1.类
+类是抽象的，在使用的时候通常会找到一个这个类的具体的存在，使用这个具体的存在，一个类可以找到多个对象
+2.对象
+某一个具体事物的存在，在现实世界中可以看得到摸得到，可以直接使用的
+3.类和对象之间的关系
+类就是创建对象的模板
+
+4.类的构成
+
+类由三部构成
+类的名称：类名
+类的属性：一组数据
+类的方法：允许对进行操作的方法
+
+举例：
+人类设计，只关心三样东西：
+事物的名称：人
+属性：身高（height）年龄（age）
+方法：跑（run）,打架（fight）
+2狗类的设计
+类名：狗（dog）
+属性：品种，毛色，性别
+方法（行为/功能）：叫，跑，咬人，吃，摇尾巴
+
+6.定义一个类
+
+class 类名：
+    方法列表
+
+```python
+class Car:
+    #方法
+    def getCarInfo(self):
+        print('车轮子个数')
+
+
+```
+
+### __init__()方法
+1.使用方式
+```python
+def 类名
+# 初始化函数，用来完成一些默认的设定
+def __init__():
+    pass
+```
+2.__init__()方法的调用
+
+```python
+class Car:
+    ## 方法
+    def __init__(self):
+        self.color = "blue"
+        self.wheelNum = 4
+    def getCarInfo(self):
+        print('车轮子的个数%d,颜色%s'%(self.wheelNum,self.color))
+    
+    def move(self):
+        print("车在移动....")
+
+bens = Car()
+
+bens.getCarInfo()
+
+bens.move()
+
+```
+1.__init__()方法在创建一个对象的时候默认被调用，不需要手动去调用
+2.__init__(self)默认有一个参数的名字为self，如果在创建对象的时候传递了两个实参，那么
+__init__(self) 中出了self作为一个参数外还需要两个形参，例如__init__(self,x,y)
+3.__init__(self) 中的self参数，不需要开发者传递，python解释器会自动
+
+10.self 
+
+```python
+class Animal:
+    def __init__(self,name):
+        self.name = name
+    def printName(self):
+        print('名字为：%s'%self.name)
+
+def myPrint(animal):
+    animal.printName()
+
+dog1 =Animal("西西")
+
+myPrint(dog1)
+dog2 = Animal("北北")
+myPrint(dog2)
+
+```
+
+所谓self,可以理解为自己
+可以把self当成是C++类里面的this指针一样理解，就是对象本身的意思
+某个对象调用其方法的时候，python解释器会把这个对象的第一个参数传递给self
+所以开发者只需要传递后面的参数就好了
