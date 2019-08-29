@@ -193,6 +193,12 @@ for key,value in info.items():
 
 ```
 
+
+
+
+
+
+
 ## 5.文件操作
 #### 1.打开文件
 在python中，使用open函数的时候，可以打开一个已经存在的文件，或者创建一个新的文件
@@ -437,3 +443,103 @@ print(p.getCountry())
 print(People.getCountry())
 
 ```
+
+
+
+2.静态方法
+
+需要通过修饰器@staticmethod 来进行修饰，静态方法不需要定义参数
+
+```python
+class People(object):
+    country = 'china'
+
+    @staticmethod
+    #静态方法
+    def getCountry():
+        return People.country
+
+print(People.getCountry())
+
+
+```
+
+从类方法和实例方法以及静态方法的定义形式可以看出来，类方法的第一个参数是类对象，那么通过cls引用的必定是类对象的属性和方法；,而实例方法的第一个第一个对象是实例对象self,那么通过self引用的可能是类属性，也有可能是实例属性（这个需要具体去分析），不过存在相同的名称的类属性和实例属性的情况下，实例属性优先级更高，静态方法中不需要额外定义参数，因此在静态方法中引用类属性的话，必须通过类对象来引用
+
+
+
+### 公共方法
+
+python常用的内置函数
+cmp(item1,item2) 比较两个数值
+len(item) 计算容器中的元素个数
+max(item) 返回容器中的元素的最大值
+min(item) 返回容器中元素的最小值
+del(item) 删除变量
+
+引用
+在python中，值是靠引用来传递的
+我们可以用id()来判断两个两个变量是否为同一个值的引用，我们可以将id值理解为那块内存的地址标志
+下面演示的是不可变类型的数值
+```python
+a = 1
+b = a
+print(id(a))
+print(id(b))  #此时a,b的数值一样
+a =2
+print(b)
+print(id(a))
+print(id(b))   #a和b的地址已经变了
+```
+
+下面演示一下可变类型的赋值
+
+```python
+a = [1,2]
+b = a
+print(id(a))
+print(id(b))
+
+a.append(3)
+
+for i in b:
+    print(i)
+print(id(a))
+print(id(b))
+
+```
+
+可变类型与不可变的类型
+
+可变类型，数值可以改变：
+列表list
+字典dict
+
+不可变类型，值不可以改变：
+数值类型 int long bool float
+字符串 str
+元组tuple
+
+## python基础之函数
+
+1.函数可以有多个返回值
+```python
+def divid(a,b):
+    shang = a//b
+    yushu = a%b
+    return shang,yushu
+sh,yu = divid(5,2)
+print(sh,yu)
+
+```
+本质上是利用了元组
+
+### 2.缺省参数
+1.调用函数时，缺省参数的值如果没有传入，则被默认值
+
+注意：带有默认值的参数一定要位于参数列表的最后面
+
+### 3.不定长参数
+
+
+
