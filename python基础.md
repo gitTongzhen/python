@@ -540,6 +540,65 @@ print(sh,yu)
 注意：带有默认值的参数一定要位于参数列表的最后面
 
 ### 3.不定长参数
+有时可能需要一个函数能够处理比当初声明时更多的参数，这些参数叫做不定长的参数，声明的时候不会命名
+
+基本语法：
+```python
+def functionname([formal_args,]*srgs,**kwargs):
+    "函数_文档字符串"
+    function_suite
+    return [expression]
+
+```
+加了星号（*）的变量args会存放所有未命名的变量参数，args是元组，而加了**的变量kwargs会存放命名参数，就是以key = value的形式，kwargs为字典结构
+
+```python
+
+def fun(a,b,*args,**kwargs):
+    print("a = ",a)
+    print("b = ",b)
+    print("args = ",args)
+    print("kwargs = ")
+    for key ,value in keargs.items():
+        print(key,"=",value)
+
+fun(1,2,3,4,5,c=6,d=7,e=8)
+```
+
+### python基础之面向对象3
+
+1.__new__方法
+加强记忆
+```python
+class A(onject):
+    def __init__(self):
+        print("这是init方法")
+    
+    def __new__(cls):
+        print("这是new方法")
+        return object.__new__(cls)
+a=()
+```
+
+__new__ 至少要有一个参数cls，代表要实例化的类，此参数在实例化由python解释器自动提供
+
+__new__ 必须要有返回值，返回实例化出来的实例，这点在自己实现 __new__ 时候要特别注意，可以return父类的__new__出来的实例，或者直接是object的__new__出来的实例
+
+__init__ 有一个参数self,这个就是__new__返回的实例，__init__ 在__new__ 的基础上可以完成其他初始化的动作，__init__ 不需要返回值
+
+我们将类比作制造商，__new__ 方法是前期的原材料购买环节，__init__方法就是在原来材料的基础上，加工，初始化商品环节
 
 
+2.异常
 
+1.概念
+当python 检测到一个错误的时候，解释器就无法继续执行了，反而会出现一些错误的提示，这就是所谓的异常
+2.捕获异常
+```python
+try:
+    print("---------------")
+    open("222.txt",'r')
+    print("-------------")
+except IOError
+    pass
+2.
