@@ -70,24 +70,36 @@
 # a=A()
 
 
-import numpy as np
-import urllib.request as req
-import cv2
+# import numpy as np
+# import urllib.request as req
+# import cv2
  
-# URL到图片
-def url_to_image(url):
-    # download the image, convert it to a NumPy array, and then read
-    # it into OpenCV format
-    resp = req.urlopen(url)
-    # bytearray将数据转换成（返回）一个新的字节数组
-    # asarray 复制数据，将结构化数据转换成ndarray
-    image = np.asarray(bytearray(resp.read()), dtype="uint8")
-    # cv2.imdecode()函数将数据解码成Opencv图像格式
-    image = cv2.imdecode(image, cv2.IMREAD_COLOR)
-    return  image
+# # URL到图片
+# def url_to_image(url):
+#     # download the image, convert it to a NumPy array, and then read
+#     # it into OpenCV format
+#     resp = req.urlopen(url)
+#     # bytearray将数据转换成（返回）一个新的字节数组
+#     # asarray 复制数据，将结构化数据转换成ndarray
+#     image = np.asarray(bytearray(resp.read()), dtype="uint8")
+#     # cv2.imdecode()函数将数据解码成Opencv图像格式
+#     image = cv2.imdecode(image, cv2.IMREAD_COLOR)
+#     return  image
 
 
-url = "https://dancf-st-gdx.oss-cn-hangzhou.aliyuncs.com/zjz/images/15481222158466.png"
+# url = "https://dancf-st-gdx.oss-cn-hangzhou.aliyuncs.com/zjz/images/15481222158466.png"
 
-image = url_to_image(url)
-print(image.shape)
+# image = url_to_image(url)
+# print(image.shape)
+
+def fib(times):
+    n=0
+    a,b=0,1
+    while n<times:
+        yield b
+        a,b=b,a+b
+        n+=1
+    return "done"
+for i in fib(4):
+    print(i)
+
