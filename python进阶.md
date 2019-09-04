@@ -319,3 +319,110 @@ for i in g:
 1.节约内存
 2.迭代到下一次调用时，所使用的参数都是第一次保留下的，即是说，在整个函数调用的参数都是第一次所调用保留的，而不是新创建的
 
+
+## 闭包
+1.函数引用
+
+```python
+def test1():
+    print("---- in test1 func ----")
+test1()
+
+#引用函数
+ret = test1
+print(id(ret))
+print(id(test1))
+
+```
+
+2.什么是闭包
+
+```python
+def test(number):
+    #在函数的内部再定义一个函数，并且这个函数用到了外边函数的变量，那么将这个函数以及用到的一些变量称之为闭包
+    def test_in(number_in):
+        print("in test_in 函数，number_in is %d"%number_in)
+        return number+number_in
+    #其实这里返回的是闭包的结果
+    return test_in
+
+#给test函数赋值，这个20就是给参数number
+ret = test(20)
+
+#注意这里的100其实给参数number_in
+print(ret(100))
+
+#注意这里的200其实给参数number_in
+print(ret(200))
+
+```
+
+内部函数对于外部函数作用域的变量的引用，则称内部函数为闭包
+
+实例：
+```python
+def line_conf(a,b):
+    def line(x):
+        return a*x+b
+    return line
+
+line1 = line_conf(1,1)
+line2 = line_conf(4,5)
+print(line1(5)) #输出6
+print(line2(5)) #输出23
+
+```
+
+这个例子中，函数line与变量a,b构成了闭包。在创建闭包的时候，我们通过line_conf的参数说明了这两个变量的取值，这样子，我们就确定了函数的最终形式(y =x +1和y = 4x +5)。我们只需要变换参数a,b，就可以获得不同的直线表达函数。由此，我们可以看到，闭包也具有提高代码可复用的作用
+
+3.小结：
+1.闭包优化了变量，原来的类对象完成的工作，闭包也可以完成
+2.由于闭包引入了外部函数的局部变量，则外部函数的局部变量没有及时释放，消耗内存
+
+
+
+## 装饰器
+
+装饰器本质上就是一个python函数，他可以让其他的函数在不需要做任何代码变动的前提下，增加额外的功能，装饰器的返回值也是一个函数对象。它经常用于有切面需求的场景，比如插入日志，性能测试，事务处理，缓存，权限校验等场景。装饰器是解决这类问题的绝佳设计，有了装饰器，我们就可以抽离出大量与函数功能无关的雷同代码并继续重用，概括来讲，装饰器的作用就是为已经存在的函数或者对象添加额外的功能
+
+```python
+# 定义函数：完成数据包裹
+def makeBold(fn):
+    def warpped():
+        return "<b>"+fn() +"</b>"
+        return warpped
+
+# 定义函数：完成包裹数据
+def makeItalic(fn):
+    def wrapped():
+        return "<i>" + fn() + "</i>"
+    return wrapped
+
+
+@makeBold
+def test1():
+    return "hello world-1"
+
+@makeItalic
+def test2():
+    return "hello world-2"
+
+@makeBold
+@makeItalic
+def test3():
+    return "hello world-3"
+
+print(test1())
+print(test2())
+print(test3())
+
+```
+
+装饰器的作用：
+1.引入日志
+2.函数执行时间统计
+3.执行函数前预备处理
+4.执行函数后的清理功能
+5.权限校验等场景
+6.缓存
+
