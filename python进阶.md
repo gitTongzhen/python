@@ -426,3 +426,95 @@ print(test3())
 5.权限校验等场景
 6.缓存
 
+## import 搜索路径
+```python
+import sys
+print(sys.path)
+
+```
+路径搜索：
+1.从上面列出的目录里面一次查找要导入的模块文件
+2.''标识当前目录
+
+程序执行时导入模块的路径
+sys.path.append('/home/icatest/XXX')
+sys.path.insert(0,'/home/itcast/xxx')
+
+2.重新导入模块
+倘若，更改了已经在python shell 中导入的模块，然后重新导入该模块，python会认为"我已经导入了该模块，不需要再次读取该文件",所以更改将无效
+
+解决这种问题的办法是使用reload函数
+
+```python
+#方法一
+import importlib
+importlib.reload(module)
+# 方法二：
+from importlib import reload
+reload(module)
+
+```
+
+3.循环导入
+a模块要导入b模块，而b模块又要到如a模块，这要陷入死循环
+如何避免：
+1.程序设计上分层。降低耦合
+2.导入语句放到后面需要导入时再导入，例如放到函数体内导入
+
+4.作用域
+
+```python
+A = 100
+B = 200
+def test():
+    a =11
+    b =22
+    print(locals())
+test()
+print(globals())
+
+```
+5 == ,is
+is是比较两个引用是否指向了同一个对象(引用比较)
+ == 是比较两个对象是否相等
+
+
+ ## 复制，深拷贝和浅拷贝的区别
+ 在python中，对象的赋值实际上是对象的引用。当创建一个对象，然后把它赋值给另外一个变量的时候，python并没有拷贝这个对象，只是拷贝了对象的引用
+
+ 1.直接赋值
+ 默认浅拷贝传递对象的引用而已。原始列表改变，被赋值的b也会做出相同的改变
+
+ 2.copy浅拷贝
+
+ 只拷贝父对象，不会拷贝对象内部的子对象。所以原始数据改变，子对象也会改变
+ ```python
+import copy
+a = [1,2,3,[4,6],5]
+c = copy.copy(a)
+print(c)
+a.append(9)
+print(a)
+print(c)
+a[3].append(2)
+print(a)
+print(c)
+
+ ```
+
+ 3.深拷贝，包含对象里面的子对象的拷贝，所以原始对象的改变不会造成任何子对象的改变
+
+ ```python
+import copy
+
+a = [1,2,3,[4,6],5]
+c = copy.deepcopy(a)
+print(c)
+a.append(9)
+print(a)
+print(c)
+a[3].append(2)
+print(a)
+print(c)
+
+ ```

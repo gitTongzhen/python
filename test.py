@@ -92,14 +92,19 @@
 # image = url_to_image(url)
 # print(image.shape)
 
-def fib(times):
-    n=0
-    a,b=0,1
-    while n<times:
-        yield b
-        a,b=b,a+b
-        n+=1
-    return "done"
-for i in fib(4):
-    print(i)
+# def fib(times):
+#     n=0
+#     a,b=0,1
+#     while n<times:
+#         yield b
+#         a,b=b,a+b
+#         n+=1
+#     return "done"
+# for i in fib(4):
+#     print(i)
 
+
+import cv2
+file_path = "20190701-174812-1339.jpg"
+image = cv2.imread(file_path, cv2.IMREAD_UNCHANGED)
+cv2.imwrite("result1.jpg",image)
